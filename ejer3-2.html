@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área del triángulo con Formulario de entrada</title>
+    <!-- enlace al estilo bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+  <div id="wrapper" class="col-sm-10 col-md-8 col-lg-6 mx-auto mt-5">
+    <!-- formulario de entrada de datos para calcular el area del triángulo-->
+    <form class="border border-primary p-3" onsubmit="return areaTriangulo()">
+
+        <h1 >Calculo áreas de triángulo</h1>
+        
+        <div class="form-group">
+          <label for="base">Introduce la base</label>
+          <input type="text" class="form-control" id="base" aria-describedby="baseHelp">
+          <small id="baseHelp" class="form-text text-danger"></small>
+        </div>
+        <div class="form-group">
+          <label for="altura">Introduce la altura</label>
+          <input type="text" class="form-control" id="altura" aria-describedby="alturaHelp">
+          <small id="alturaHelp" class="form-text text-danger"></small>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular</button>
+      </form>
+
+      <h2 id="resultado" class="mt-4"></h2>
+
+    </div>
+
+    <!-- librerias js de bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 
+    <!-- comienza mi script de cálculo del área del triángulo-->
+    <script>
+      function areaTriangulo(){
+
+        // área de declaraciones
+        var base=parseFloat(document.getElementById("base").value);
+        var altura=parseFloat(document.getElementById("altura").value);
+        var area; // vble que contendrá el resultado del área
+        var correcto=true; // flag que indica si todos los datos de entrada son correcto
+        document.getElementById("baseHelp").innerHTML="";
+        document.getElementById("base").style.borderColor="black";
+        document.getElementById("alturaHelp").innerHTML="";
+        document.getElementById("altura").style.borderColor="black";
+        // vamos a validar la base
+        // ATENCIÓN: LA FUNCIÓN DEBERÍA HACER SÓLAMENTE EL CÁLCULO
+        // UNA FUNCIÓN SÓLO DEBE HACER UNA ÚNICA COSA
+        // LA VALIDACIÓN DEBERÍA ESTAR EN OTRA FUNCIÓN Y ENCADENARLAS LAS DOS
+        // vamos a utilizar una técnica de programación llamada FLAG
+
+        if (isNaN(base)){
+          document.getElementById("baseHelp").innerHTML="Debes introducir un número";
+          document.getElementById("base").style.borderColor="red";
+          correcto=false;
+        }
+        
+        if (isNaN(altura)){
+          document.getElementById("alturaHelp").innerHTML="Debes introducir un número";
+          document.getElementById("altura").style.borderColor="red";
+          correcto=false;
+        }
+        // AL FINAL DE LOS TEST DE VALIDACIÓN SE COMPRUEBA SI HA SALTADO ALGÚN ERROR
+        // SI ES ASÍ SE DEVUELVE EL CONTROL, Y NO SE PASA DEL FORMULARIO
+        
+        if (! correcto) {
+          return false;
+        }
+
+        // operaciones
+        area = base*altura/2;
+        //var suma=base+altura;
+
+        // salida de resultados
+        document.getElementById("resultado").innerHTML="Resultado del área: "+area;
+        //alert("la suma es: "+suma);
+        return false;
+       }
+    </script>
+</body>
+</html>
